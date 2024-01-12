@@ -1,0 +1,96 @@
+.home-body{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+    gap: 3rem;
+}
+
+
+/* Post Component Section */
+
+
+.post-outerblock{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 70%;
+    padding: 2rem 1rem 2rem 2rem ;
+    border-radius: 1rem;
+    
+}
+
+.Post-block{
+    display: flex;   
+    flex-flow: row;
+    gap : 2rem;   
+    
+}
+
+.Post{
+    min-width: 60%;
+    border-radius: 1rem;
+    border: 2px solid black;
+    padding: 1rem 0.2rem 0rem 1rem; 
+    max-height: 7rem; 
+    text-overflow: 0;
+}
+
+.Author{
+    display: flex;
+    flex-flow: column;
+    border-radius: 1rem;
+    border: 2px solid black;
+    width: 17rem;
+    max-height: 7rem;
+    padding: 1rem;    
+}
+
+.AuthorPost-Detail{
+    display :flex;
+    flex-flow :row;
+    gap : 0.1rem;
+}
+
+
+/* Related post section */
+
+.relatedPost-block{
+    border-radius: 1rem;
+    border: 2px solid black;
+    padding: 1rem; 
+    width: 25%;
+    display: flex;
+    flex-flow: column;
+    gap: 2rem;
+    max-height: 40rem;
+    overflow: hidden;
+}
+
+.relatedPost{
+    border-radius: 1rem;
+    border: 2px solid black;
+    padding: 1rem; 
+    max-width: 90%;
+    max-height: 4rem;
+}
+
+.RelatedPost-title{
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    display: block;
+}
+
+.Nextpost-btn{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 0rem;
+    flex: 1;
+}
+@media screen and (max-width: 300px){
+
+}

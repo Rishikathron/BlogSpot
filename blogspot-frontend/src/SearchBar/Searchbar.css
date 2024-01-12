@@ -1,0 +1,19 @@
+
+.search-icon{
+  font-size: 10rem;
+  background-size: 10rem;
+}
+
+.search-bar{
+  display: flex;  
+}
+
+.Input-field {
+    margin-top: 1rem;
+    border: 2px solid black;    
+    width: 25%;
+    height: 100%;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 7px;  
+  }

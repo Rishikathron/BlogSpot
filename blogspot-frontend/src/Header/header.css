@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* classes */
+.header-block{
+    display: flex;
+    justify-content: space-between;    
+}
+
+.title{
+    letter-spacing: 0.2rem;
+}
+
+.nav-elements{
+    display: flex;
+    gap: 2rem;
+    
+}
+
+.nav-elements-block{
+    margin-right: 2rem;
+}
+
+/* elements */
+button{
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.5rem;   
+    background-color: white;        
+}
+
