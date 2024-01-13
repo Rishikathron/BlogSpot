@@ -34,6 +34,7 @@
     padding: 1rem 0.2rem 0rem 1rem; 
     max-height: 7rem; 
     text-overflow: 0;
+    cursor: pointer;
 }
 
 .Author{
@@ -73,6 +74,7 @@
     padding: 1rem; 
     max-width: 90%;
     max-height: 4rem;
+    cursor: pointer;
 }
 
 .RelatedPost-title{

@@ -13,7 +13,7 @@ const Header = () =>{
                 <div >
                     <nav className="nav-elements-block">
                         <ul className="nav-elements">                            
-                            <Link style={{ textDecoration: 'none' }} to='/'><button>Home</button></Link>
+                            <Link style={{ textDecoration: 'none' }} to='/' ><button>Home</button></Link>
                             <Link style={{ textDecoration: 'none' }} to='/CreatePost'><button>Post</button></Link>
                             <Link style={{ textDecoration: 'none' }} to='/About'><button>About</button></Link> 
                             <Link style={{ textDecoration: 'none' }} to='/Login'><Avatar src="/broken-image.jpg" /></Link>
