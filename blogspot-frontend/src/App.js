@@ -10,6 +10,8 @@ import AuthorDetail from "./Pages/AuthorDetail.jsx";
 
 
 
+
+
 function App() {
   return (
     <div className="home-block">    
@@ -18,8 +20,12 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/CreatePost'></Route>
           <Route path='/About' element = { <About />}></Route>
-          <Route path='/Login' element = { <Login/> }></Route>
+          
+            <Route path='/Login' element = { <Login/> }></Route>
+          
+          
           <Route path='/Registration' element = { <Registration/> }></Route>
+          
           <Route path='/BlogPost' element = { < BlogPost /> }></Route>
           <Route path='/AuthorDetail' element = { <AuthorDetail/> }></Route>
         </Routes>

@@ -1,9 +1,25 @@
 import { useNavigate } from "react-router-dom"
 import PostDetails from "../Home/PostDetails";
 import './author.css'
+import { useEffect } from "react";
+import axios from 'axios';
 
 const AuthorDetail = () =>{
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        const fetchUsers = async ()=>{
+
+            try{
+                let res = await axios.get('http://localhost:3001/auth/users');
+                console.log(res.data);
+            }
+            catch(ex){console.log(ex) }
+        }
+        fetchUsers();
+        
+    },[]);
+
 
     var postTitle = "Sample Title"
     var postDescription = "This is the sample description for the post component. This is the sample description for the post component. his is the sample description for the post  This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post"
