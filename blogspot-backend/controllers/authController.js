@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 
 
-const getallUsers = async (req,res) =>{ //3001 port
+const getallUsers = async (req,res) =>{ 
     try{
         console.log("Inside users");  
         // console.log(userModel.findOne({UserName:"Rishwanth"}));
@@ -16,23 +16,26 @@ const getallUsers = async (req,res) =>{ //3001 port
 
 const loginUser = async (req,res)=>{
     try{
-        if(req.query?.name != null && req.query?.password != null){
-            const userData = await userModel.findOne({UserName : req.query.name});
+        console.log("Inside login user" + req.body.name)
+        if(req.body?.name != null && req.body?.password != null){
+            
+            const userData = await userModel.findOne({Email : req.body.name});
+            console.log(userData)
             if(userData != null){
                 
-                if(userData.Password == req.query?.password){
-                    res.status(200).json({message : "Logged in Successfully"});
+                if(userData.Password == req.body?.password){
+                    res.status(200).json({userData , message : "Logged in Successfully"});
                 }
                 else{
                     res.status(400).json({message : "Password missmatch"})
                 }
             }
             else{
-                res.status(400).json({message : "Please check the userName"})
+                res.status(200).json({message : "Please check the userName"})
             }
         }
         else{
-            res.status(400).json({message : "UserName and Password Field should not be Empty"})
+            res.status(200).json({message : "UserName and Password Field should not be Empty"})
         }
     }
     catch(err){ res.status(400).json({message : err}); }
@@ -59,7 +62,7 @@ const registerUser = async (req,res)=>{
         });
         console.log("inside register try 1");
         const newUser = await userData.save();
-        res.status(200).json({message : `User ${req.body.name} is Registered Successfully`})
+        res.status(200).json({message : `Success`})
     }
     catch(err){console.log("inside register catch"); res.status(400).json({message : err})}   
     
