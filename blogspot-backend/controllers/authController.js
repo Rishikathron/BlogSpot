@@ -1,15 +1,32 @@
 const userModel = require('../models/Users.js');
-const bodyParser = require('body-parser');
+
 
 
 
 const getallUsers = async (req,res) =>{ 
     try{
-        console.log("Inside users");  
-        // console.log(userModel.findOne({UserName:"Rishwanth"}));
+
         const userData = await userModel.find();
-        console.log(userData)     
-        res.status(200).json(userData);
+        if(userData != null){
+            console.log(userData);     
+            res.status(200).json(userData);
+        }
+        
+    }
+    catch(err){ res.status(400).json({message : "no users found"}); }
+}
+
+const getUserDetail = async (req,res) =>{ 
+    try{
+        console.log("Inside users");  
+        console.log(req.query.id)
+        const userData = await userModel.findOne({UserId : toString(req.query.id)}).exec();
+        if(userData == null){
+            res.status(500).json({message : "No Users Found" });
+        }else{
+            console.log(userData);    
+            res.status(200).json(userData);
+        }        
     }
     catch(err){ res.status(400).json({message : "no users found"}); }
 }
@@ -52,7 +69,7 @@ const registerUser = async (req,res)=>{
         }
         console.log("inside register try" + req.body);
         const userData = new userModel({
-            
+            UserId : req.body.userId,
             UserName : req.body.name,            
             Password : req.body.password,
             ConfirmPassword : req.body.ConfirmPassword,
@@ -68,4 +85,4 @@ const registerUser = async (req,res)=>{
     
 }
 
-module.exports = {getallUsers,registerUser,loginUser}
+module.exports = {getallUsers,registerUser,loginUser,getUserDetail}
