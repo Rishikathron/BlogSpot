@@ -18,7 +18,7 @@ const Header = () =>{
         console.log("Session storage vlues -->" + userLoggedIn)
     },[sessionStorage.getItem("UserName")]);
 
-    const confirmLogout = (e) =>{       
+    const confirmLogout = () =>{       
         
         if(window.confirm("Are you sure you want to log out?")){
             sessionStorage.clear();  

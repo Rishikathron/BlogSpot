@@ -7,6 +7,7 @@ import Login from "./Authentication/Login.jsx";
 import Registration from "./Authentication/Registration.jsx";
 import BlogPost from "./Pages/BlogPost.jsx";
 import AuthorDetail from "./Pages/AuthorDetail.jsx";
+import CreatePost from "./Pages/CreatePost.jsx";
 
 
 
@@ -18,7 +19,7 @@ function App() {
         <div><Header></Header></div>        
         <Routes>
           <Route path='/' element={<Home />}></Route>
-          <Route path='/CreatePost'></Route>
+          <Route path='/CreatePost' element = { <CreatePost/> }></Route>
           <Route path='/About' element = { <About />}></Route>
           
             <Route path='/Login' element = { <Login/> }></Route>

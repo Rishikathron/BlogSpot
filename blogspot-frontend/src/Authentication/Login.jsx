@@ -18,9 +18,11 @@ const Login = () =>{
         try{
             const response = await axios.post(loginAPI,apibody);
             console.log("this is =>" + response.data.userData.UserName)            
-            //sessionStorage.setItem("UserName", response.data.UserData.UserName);
+            
             sessionStorage.setItem("UserEmail", response.data.userData.Email);
             sessionStorage.setItem("UserName", response.data.userData.UserName);
+            sessionStorage.setItem("UserId", response.data.userData.UserId);
+            
             alert(response.data.message);
             setTimeout(() => {                
                 navigate("/") ;

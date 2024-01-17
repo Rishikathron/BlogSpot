@@ -1,15 +1,23 @@
+import { useNavigate } from "react-router-dom"
 
+const PostsDetails = ({Title,Description,Body}) =>{
 
-const PostsDetails = (props) =>{
+    const navigate = useNavigate();
+
+    const postComponentClick = () =>{        
+        navigate('/BlogPost',{state : {PostTitle : Title , PostDescription : Description , PostBody : Body}});
+    }
     
 
     return (
         <>
-            <div >
-                <h2>{props.Title}</h2>
-                <h3>{props.Description}</h3>
-            </div>
-            
+            <li style={{listStyle:"none"}}>
+                <div className='Post' onClick={postComponentClick}>
+                    
+                    <h2>{Title}</h2>
+                    <h3>{Description}</h3>
+                </div>
+            </li>
         </>
     )
 }

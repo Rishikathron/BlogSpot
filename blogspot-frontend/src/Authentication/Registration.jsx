@@ -13,6 +13,7 @@ const Registration = () =>{
     const navigate = useNavigate();
     const authRegister = async () => {       
         const apiBody = {
+            userId : crypto.randomUUID(),
             name: name,
             password: password,   
             ConfirmPassword: confirmPassword,

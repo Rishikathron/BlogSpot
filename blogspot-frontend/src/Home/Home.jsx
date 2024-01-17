@@ -3,72 +3,70 @@ import Searchbar from "../SearchBar/Searchbar.jsx";
 import PostDetails from "./PostDetails.jsx";
 import Author from './Author.jsx';
 import RelatedPost from './RelatedPost.jsx';
-import { useNavigate } from "react-router-dom"
+import { useEffect,useState } from 'react';
+import axios from 'axios';
 
 
 
 const Home = () =>{
 
-    const navigate = useNavigate();
+    
+    const getAllPosts_API = "http://localhost:3001/posts/getAllPosts";
+    const [response , SetResponse] = useState([]);   
+   
+    useEffect(()=>{
+        const fetchPostApi = async() =>{
+            await axios.get(getAllPosts_API)
+            .then(response => {                
+                SetResponse(response.data); 
+              });            
+        }
+        fetchPostApi(); 
+    },[])
 
-    var postTitle = "Sample Title"
-    var postDescription = "This is the sample description for the post component. This is the sample description for the post component. his is the sample description for the post  This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post"
-
-    var trimmedDescription = postDescription.split('').slice(0,200).join('') + '...'
-
-
-    const postComponentClick = () =>{        
-        navigate('/BlogPost');
-    }
-    const authorComponentClick = ()=>{
-        navigate('/AuthorDetail');
+    
+    function trimDescription(postDescription){
+        let desc = postDescription.split('').slice(0,200).join('') + '...';
+        return desc
     }
 
     return (
     <>
         <div>
-            <div><Searchbar></Searchbar> </div>
+            <div><Searchbar></Searchbar> </div>           
 
             <div className='home-body'>
                 <div className="post-outerblock">
-                    <div  className="Post-block">
-                        <div className='Post' onClick={postComponentClick}>
-                            <PostDetails Title = {postTitle} Description = {trimmedDescription} ></PostDetails> 
-                        </div>
-                        <div className='Author' onClick={authorComponentClick}><Author></Author></div>                    
-                        
-                    </div>
+                    
+                    {response.map(e => {                        
+                            return(
+                                <div  className="Post-block" >
+                                   <PostDetails key={e.PostId} Title = {e.PostTitle} Description = {trimDescription(e.PostDescription)} Body = {e.PostBody}> </PostDetails>
+                                   <Author key={e._id} AuthorName = {e.PostAuthor} genre = {e.Genre}></Author>
+                                </div> 
+                            )
+                        })}         
 
-                    <div  className="Post-block">
-                        <div className='Post'>
-                            <PostDetails Title = {postTitle} Description = {trimmedDescription}></PostDetails> 
-                        </div>
-                        <div className='Author'><Author></Author></div>                    
-                        
-                    </div>
-
-                    <div  className="Post-block">
-                        <div className='Post'>
-                            <PostDetails Title = {postTitle} Description = {trimmedDescription}></PostDetails> 
-                        </div>
-                        <div className='Author'><Author></Author></div>  
-                    </div>
                     <div className='Nextpost-btn'>
                         <button>Previous</button>
                         <button>NEXT</button>  
                     </div> 
+
                 </div>
+
+
                 <div className='relatedPost-block'>
                     <h3 className='RelatedPost-title'>Related Post</h3>
-                    <div className="relatedPost" onClick={postComponentClick}>
-                        <RelatedPost Title = {postTitle} Description = {postDescription}></RelatedPost>
-                    </div>  
-                    <div className="relatedPost">
-                        <RelatedPost Title = {postTitle} Description = {postDescription}></RelatedPost>
-                    </div>  
-                    <div className="relatedPost">
-                        <RelatedPost Title = {postTitle} Description = {postDescription}></RelatedPost>
-                    </div>
+                    {response.map((item) => {
+                        {console.log("Outer the realted post" , item);}
+                        return(
+                            <>
+                                <RelatedPost Title = {item.PostTitle} Description = {item.PostDescription}></RelatedPost>                            
+                            </>                            
+                        )
+                    })}
+                     
+                    
                     <div className='Nextpost-btn'>
                         <button>Previous</button>
                         <button>NEXT</button>                        
@@ -79,9 +77,6 @@ const Home = () =>{
             </div>
             
         </div> 
-        
-        
-    
     </>
     )
 }
