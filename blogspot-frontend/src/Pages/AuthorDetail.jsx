@@ -1,37 +1,52 @@
 import { useNavigate } from "react-router-dom"
 import PostDetails from "../Home/PostDetails";
 import './author.css'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"
 import axios from 'axios';
 
 const AuthorDetail = () =>{
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const [UserData , setUserData] = useState({});
+    const [Post , setPost] = useState([]);
+    const [authorPosts,setauthorPosts] = useState([]);
+    const [authorPageCount , setauthorPageCount] = useState(0);
+
+    const AuthorId = location?.state?.AuthorId;
+    const GetUserData_API = 'http://localhost:3001/auth/getUserDetails?id=' +  AuthorId;
+    const GetPostDetails_API = 'http://localhost:3001/posts/getUserPosts?id=' +  AuthorId;
 
     useEffect(()=>{
-        const fetchUsers = async ()=>{
-
-            try{
-                let res = await axios.get('http://localhost:3001/auth/users');
-                console.log(res.data);
-            }
-            catch(ex){console.log(ex) }
-        }
+        
         fetchUsers();
+        fetchPostDetails();
         
     },[]);
-
-
-    var postTitle = "Sample Title"
-    var postDescription = "This is the sample description for the post component. This is the sample description for the post component. his is the sample description for the post  This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post This is the sample description for the post component. his is the sample description for the post"
-
-    var trimmedDescription = postDescription.split('').slice(0,200).join('') + '...'
-
-
-    const postComponentClick = () =>{        
-        navigate('/BlogPost');
+    const fetchUsers = async ()=>{
+        try{                
+            let res = await axios.get(GetUserData_API);
+            console.log(res.data);
+            setUserData(res.data);            
+        }
+        catch(ex){console.log(ex) }
     }
-    const authorComponentClick = ()=>{
-        navigate('/AuthorDetail');
+    const fetchPostDetails = async () =>{
+        try{
+            let res = await axios.get(GetPostDetails_API);
+            console.log(res.data);
+            setPost(res.data);
+            let _authorpost = res.data.slice(authorPageCount,authorPageCount+3);
+            setauthorPosts(_authorpost);
+        }
+        catch(ex){console.log(ex)}
+    }
+
+
+    function trimDescription(postDescription){
+        let desc = postDescription.split('').slice(0,200).join('') + '...';
+        return desc
     }
 
     return (
@@ -41,51 +56,43 @@ const AuthorDetail = () =>{
                     <div className="authorDetails">
                         
                         <div className="bio">
-                            <h2>Author Name : <span>rishi</span></h2>
-                            <h2>Author Age : <span>12</span></h2>
-                            <h2>Author Email : <span>rishi@gmail.com</span></h2>
-                            <h2>Author Contact : <span>123456789</span></h2>                            
+                            <h3>Author : <span>{UserData.UserName}</span></h3>                            
+                            <h3>Email : <span>{UserData.Email}</span></h3>
+                            <h3>Contact : <span>{UserData.ContactNumber}</span></h3>                            
                         </div>
 
                     </div>
+
                     <div className="authorfame-block">
                         <div className="total-block">
                             <h3>Total Blogs</h3>
-                            <h4>20</h4>
+                            <h4>{Post.length}</h4>
                         </div>
                         <div className="followers-block">
                             <h3>Total Followers</h3>
                             <h4>120</h4>
                         </div>
                     </div>
+
                 </div>
                 <div className="authorPost-block"> 
                     <div className="post-outerblock1">
-                        <div  className="Post-block1">
-                            <div className='Post1' onClick={postComponentClick}>
-                                <PostDetails Title = {postTitle} Description = {trimmedDescription} ></PostDetails> 
-                            </div>                                           
-                            
-                        </div>
-
-                        <div  className="Post-block1">
-                            <div className='Post1'>
-                                <PostDetails Title = {postTitle} Description = {trimmedDescription}></PostDetails> 
-                            </div>
-                                            
-                            
-                        </div>
-
-                        <div  className="Post-block1">
-                            <div className='Post1'>
-                                <PostDetails Title = {postTitle} Description = {trimmedDescription}></PostDetails> 
-                            </div>                        
-                        </div>
-
-                        <div className='Nextpost-btn'>
-                            <button>Previous</button>
-                            <button>NEXT</button>  
-                        </div> 
+                        {authorPosts.map((e)=>{
+                            return(
+                                <PostDetails  
+                                key = {e.PostBody}
+                                Title = {e.PostTitle} 
+                                Description = {trimDescription(e.PostDescription)} 
+                                Body = {e.PostBody}></PostDetails>
+                            )
+                        })}  
+                        
+                        
+                           
+                        {Post.length >3 && <div className='Nextpost-btn'>  
+                            <button disabled = {Post >= 3 ? "" : "disabled"} onClick={()=>{setauthorPageCount(prev => {return prev-3})}} >Previous</button>
+                            <button disabled = {Post+3 < Post.length ? "" : "disabled"} onClick={()=>{setauthorPageCount(prev => {return prev+3})}}>NEXT</button> 
+                        </div>  }
                     </div>
                 </div>
             </div>

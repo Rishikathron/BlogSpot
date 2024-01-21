@@ -42,6 +42,22 @@ const getAllPost = async(req,res)=>{
     }
 }
 
+const getPost = async(req,res)=>{
+    try{
+        console.log(req.query.id);
+        if(req.query?.id != undefined){
+            let id = req.query.id;
+            let postData = await postModel.find({AuthorId : id})
+            if(postData != null){res.status(200).json(postData)}
+            else{res.status(200).json({message : "No Records Found"})}
+        }
+        else{
+            res.status(400).json({message : "Body undefined"})
+        }        
+    }
+    catch(ex){console.log(ex)}
+}
+
 
 const updatePost = async (req,res) => {
     try{
@@ -71,4 +87,4 @@ const updatePost = async (req,res) => {
     }
 }
 
-module.exports = {createPost , updatePost , getAllPost}
+module.exports = {createPost , updatePost , getAllPost , getPost}

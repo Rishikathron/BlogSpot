@@ -4,7 +4,9 @@ const Author = (props) =>{
     const navigate = useNavigate();
     var postGenre = "Horror";
     const authorComponentClick = ()=>{
-        navigate('/AuthorDetail');
+
+        console.log("Before click" ,props);
+        navigate('/AuthorDetail',{state : {AuthorId : props.Key}});
     }
 
     return (

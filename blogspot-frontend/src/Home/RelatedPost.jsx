@@ -14,16 +14,8 @@ const RelatedPost = (props) =>{
     }
 
     return (
-        <> 
-        {console.log("Inside related Post" , props)}
-        
+        <>   
             <PostsDetails Title = {props.Title} Description = {relatedPostDescription} onClick={postComponentClick}></PostsDetails>
-            {/* <div className="relatedPost" >
-                <PostsDetails Title = {props.Title} Description = {relatedPostDescription}></PostsDetails>
-            </div>             */}
-       
-                
-            
         </>
     )
 }

@@ -5,7 +5,7 @@ const userModel = require('../models/Users.js');
 
 const getallUsers = async (req,res) =>{ 
     try{
-
+        console.log("insile get all users")
         const userData = await userModel.find();
         if(userData != null){
             console.log(userData);     
@@ -19,16 +19,17 @@ const getallUsers = async (req,res) =>{
 const getUserDetail = async (req,res) =>{ 
     try{
         console.log("Inside users");  
-        console.log(req.query.id)
-        const userData = await userModel.findOne({UserId : toString(req.query.id)}).exec();
+        console.log(typeof (req.query.id), typeof("4971c45b-8636-4cf4-9220-dfac3aed896a"))
+        let id = req.query.id;
+        const userData = await userModel.findOne({UserId : id });
         if(userData == null){
-            res.status(500).json({message : "No Users Found" });
+            res.status(200).json({message : "No Users Found" });
         }else{
             console.log(userData);    
             res.status(200).json(userData);
         }        
     }
-    catch(err){ res.status(400).json({message : "no users found"}); }
+    catch(err){ res.status(400).json({message : "error something went wrong..."}); }
 }
 
 const loginUser = async (req,res)=>{
@@ -67,14 +68,14 @@ const registerUser = async (req,res)=>{
         if(req.body.name.length == null ){
             res.status(500).json({message : "req body is null"})
         }
-        console.log("inside register try" + req.body);
+        console.log("inside register try" + req.body.contact);
         const userData = new userModel({
             UserId : req.body.userId,
             UserName : req.body.name,            
             Password : req.body.password,
             ConfirmPassword : req.body.ConfirmPassword,
             Email : req.body.email,
-            Contact : req.body.contact
+            ContactNumber : Number(req.body.contact)
 
         });
         console.log("inside register try 1");

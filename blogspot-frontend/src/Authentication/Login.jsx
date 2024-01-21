@@ -13,11 +13,9 @@ const Login = () =>{
     const navigate = useNavigate();
 
     const authLogin = async () =>{
-        const apibody = {name : email , password : password};
-        console.log(email , password);
+        const apibody = {name : email , password : password};        
         try{
-            const response = await axios.post(loginAPI,apibody);
-            console.log("this is =>" + response.data.userData.UserName)            
+            const response = await axios.post(loginAPI,apibody);                   
             
             sessionStorage.setItem("UserEmail", response.data.userData.Email);
             sessionStorage.setItem("UserName", response.data.userData.UserName);

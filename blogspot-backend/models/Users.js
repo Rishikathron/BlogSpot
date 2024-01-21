@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     Password : {type : String},
     ConfirmPassword : {type:String},
     Email : {type : String},
-    ContactNumber : {type : Number},
+    ContactNumber : {type : String},
     CreatedDate : {type : Date , default : Date.now}
 });
 

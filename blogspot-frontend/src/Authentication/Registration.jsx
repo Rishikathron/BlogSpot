@@ -21,6 +21,7 @@ const Registration = () =>{
             contact: contact
         }
         try{
+            console.log(apiBody)
             const response = await axios.post(registerAPI,apiBody);
             if(response.data.message == "Success"){
                 setTimeout(() => {
