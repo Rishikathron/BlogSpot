@@ -10,6 +10,7 @@ import axios from 'axios';
 
 const Home = () =>{    
     const getAllPosts_API = "http://localhost:3001/posts/getAllPosts";
+
     const [response , SetResponse] = useState([]);
     const [mainPageCount , setmainPageCount] = useState(0); 
     const [relatedPageCount , setrelatedPageCount] = useState(0); 
@@ -26,7 +27,7 @@ const Home = () =>{
                 SetResponse(APIresponse.data); 
                 getAPIdata(APIresponse.data)
               });                 
-        }
+        }        
         fetchPostApi();
         setLoaderStatus(false)       
         
@@ -68,10 +69,11 @@ const Home = () =>{
     }
    
 
+
     return (
     <>
         <div>
-            <div><Searchbar></Searchbar> </div>    
+            <div><Searchbar mainPosts = {mainPosts} setmainPosts = {setmainPosts}></Searchbar> </div>    
                 
             {mainPosts?.length > 0 ?
                 <div className='home-body'>

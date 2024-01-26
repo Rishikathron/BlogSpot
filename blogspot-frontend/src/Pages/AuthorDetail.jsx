@@ -21,7 +21,7 @@ const AuthorDetail = () =>{
     useEffect(()=>{
         
         fetchUsers();
-        fetchPostDetails();
+        fetchPostDetails()
         
     },[]);
     const fetchUsers = async ()=>{
@@ -53,14 +53,12 @@ const AuthorDetail = () =>{
         <>
             <div className="mainContainer">
                 <div className="authorDetails-block"> 
-                    <div className="authorDetails">
-                        
+                    <div className="authorDetails">                        
                         <div className="bio">
                             <h3>Author : <span>{UserData.UserName}</span></h3>                            
                             <h3>Email : <span>{UserData.Email}</span></h3>
                             <h3>Contact : <span>{UserData.ContactNumber}</span></h3>                            
                         </div>
-
                     </div>
 
                     <div className="authorfame-block">
@@ -73,8 +71,8 @@ const AuthorDetail = () =>{
                             <h4>120</h4>
                         </div>
                     </div>
-
                 </div>
+                
                 <div className="authorPost-block"> 
                     <div className="post-outerblock1">
                         {authorPosts.map((e)=>{

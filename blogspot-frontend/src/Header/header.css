@@ -16,7 +16,15 @@
 .nav-elements{
     display: flex;
     gap: 2rem;
-    
+      
+}
+
+.nav-elements > * {
+    cursor: pointer;
+}
+
+.Avatar0{
+    margin-top: 0.7rem;
 }
 
 .nav-elements-block{
@@ -29,4 +37,27 @@ button{
     border-radius: 0.5rem;   
     background-color: white;        
 }
+
+
+.dropdown-box{
+    background-color: white;    
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem 0rem 1rem;
+    position: fixed;
+    right: 5rem;
+    top: 4.5rem;       
+    width: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 1s ease-out;
+}
+
+.dropdown-box > *{    
+    padding-bottom: 0.5rem;    
+}
+
+
+.dropdown-item-text{
+    color: black;
+}
+
 
