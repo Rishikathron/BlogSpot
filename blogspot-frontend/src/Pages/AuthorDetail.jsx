@@ -19,9 +19,12 @@ const AuthorDetail = () =>{
     const GetPostDetails_API = 'http://localhost:3001/posts/getUserPosts?id=' +  AuthorId;
 
     useEffect(()=>{
+        if(AuthorId != null){
+            fetchUsers();
+            fetchPostDetails()
+        }
         
-        fetchUsers();
-        fetchPostDetails()
+        
         
     },[]);
     const fetchUsers = async ()=>{
@@ -50,7 +53,7 @@ const AuthorDetail = () =>{
     }
 
     return (
-        <>
+        <>{AuthorId != null ? 
             <div className="mainContainer">
                 <div className="authorDetails-block"> 
                     <div className="authorDetails">                        
@@ -75,7 +78,7 @@ const AuthorDetail = () =>{
                 
                 <div className="authorPost-block"> 
                     <div className="post-outerblock1">
-                        {authorPosts.map((e)=>{
+                        { authorPosts.map((e)=>{
                             return(
                                 <PostDetails  
                                 key = {e.PostBody}
@@ -94,7 +97,13 @@ const AuthorDetail = () =>{
                     </div>
                     
                 </div>
-            </div>
+            </div> : <div >
+                <h1 className="anonymous">
+                    Anonymus post Details not Available :)
+                </h1>
+                
+                </div>
+        }
         </>
     )
 

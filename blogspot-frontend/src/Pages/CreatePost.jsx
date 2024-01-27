@@ -18,13 +18,16 @@ const CreatePost = ()=>{
         postTitle : postTitle,
         postDescription : description,
         postBody : postBody,
-        authorId : sessionStorage.getItem('UserId'),
-        authorName : sessionStorage.getItem('UserName'),
+        authorId : sessionStorage.getItem('UserId') ,
+        authorName : sessionStorage.getItem('UserName') ,
         genre : genre
     }
 
     const submitPost = async () =>{
         if(postBody != "" && postTitle.length != "" &&  description.length != "" &&  genre != ""){
+            if(PostapiBody.authorName == null){
+                PostapiBody.authorName = "Anonymus"                
+            }
             console.log(PostapiBody);
             const response = await axios.post(createPost_API,PostapiBody);
             console.log(response.data)

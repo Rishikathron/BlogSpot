@@ -29,7 +29,8 @@ const Header = () =>{
         if(window.confirm("Are you sure you want to log out?")){
             sessionStorage.clear();  
             setUserName("");
-            setTimeout(()=>{                
+            setTimeout(()=>{ 
+                setisMenuVisible(false)               
                 navigate('/Login');
             },500)                 
         }
