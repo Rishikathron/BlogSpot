@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
 const Login = () =>{
-
+  
     const loginAPI = 'http://localhost:3001/auth/Login';
 
     const [email, setEmail] = useState("")
@@ -15,17 +15,24 @@ const Login = () =>{
     const authLogin = async () =>{
         const apibody = {name : email , password : password};        
         try{
-            const response = await axios.post(loginAPI,apibody);                   
+            const response = await axios.post(loginAPI,apibody);  
+            console.log("showing response" , response)   
+            if(response.data.message != "Logged in Successfully"){
+                alert(response.data.message);
+            }
+            else{
+                sessionStorage.setItem("UserEmail", response.data.userData.Email);
+                sessionStorage.setItem("UserName", response.data.userData.UserName);
+                sessionStorage.setItem("UserId", response.data.userData.UserId);
+                
+                alert(response.data.message);
+                setTimeout(() => {                
+                    navigate("/") ;
+                    console.log("Logged in")
+                }, 500);
+
+            }
             
-            sessionStorage.setItem("UserEmail", response.data.userData.Email);
-            sessionStorage.setItem("UserName", response.data.userData.UserName);
-            sessionStorage.setItem("UserId", response.data.userData.UserId);
-            
-            alert(response.data.message);
-            setTimeout(() => {                
-                navigate("/") ;
-                console.log("Logged in")
-            }, 500);
         }
         catch(ex){
             console.log(ex);

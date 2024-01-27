@@ -17,3 +17,14 @@
     background: white;
     border-radius: 7px;  
   }
+
+  /* Media - Queries */
+
+  @media screen and (max-width : 650px) {
+    .Input-field{
+      align-items: center;
+      justify-content: center;
+       width: 90%;
+    }
+    
+  }

@@ -8,7 +8,7 @@ a {
 	text-decoration: none;
 	margin: 15px 0;
 }
-
+   
 .button {
 	border-radius: 20px;
 	border: 1px solid black;
@@ -28,11 +28,6 @@ a {
 
 .button:focus {
 	outline: none;
-}
-
-.button.ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
 }
 
 
@@ -76,3 +71,12 @@ input {
 	justify-content: center;
 }
 
+
+/* media Query */
+
+@media screen and (max-width : 750px) {
+	.authbtns{
+		flex-flow: column;
+	}
+	
+}

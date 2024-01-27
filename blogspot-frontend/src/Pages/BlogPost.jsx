@@ -6,16 +6,6 @@ const BlogPost = () =>{
     const location = useLocation();
     const [isLiked , setIsLiked] = useState(false)
 
-    // const updatePost_API = "http://localhost:3001/posts/updatePost";
-
-    // const updatePost_API_body = {
-    //    postLike : location.state.PostLike
-    // }
-    // useEffect(()=>{
-        
-
-    // },[isLiked])
-
     return (
         <>
             {console.log("Inside blog post ", location)}

@@ -12,7 +12,7 @@ const CreatePost = ()=>{
     const [postBody , setPostBody] = useState('');
 
     const createPost_API = ' http://localhost:3001/posts/createPost'
-
+ 
     let PostapiBody = {
         postId : crypto.randomUUID(),
         postTitle : postTitle,
@@ -24,35 +24,45 @@ const CreatePost = ()=>{
     }
 
     const submitPost = async () =>{
-        console.log(PostapiBody);
-        const response = await axios.post(createPost_API,PostapiBody);
-        console.log(response.data)
-        setTimeout(()=>{
-            alert('Blog Posted...!')
-            navigate('/')
-        },500)
+        if(postBody != "" && postTitle.length != "" &&  description.length != "" &&  genre != ""){
+            console.log(PostapiBody);
+            const response = await axios.post(createPost_API,PostapiBody);
+            console.log(response.data)
+            setTimeout(()=>{
+                alert('Blog Posted...!')
+                navigate('/')
+            },500)
+        }
+        else{
+            alert('Please fill out all fields...')
+        }
+        
     }
 
 
     return (
         <>
             <div className="containerPost">
-                <div className="left-block">
-                    <h2>Create New Post</h2> <br/>
-                    <input placeholder='Title' onChange={(e)=>setPostTitle(e.target.value)}/>
-                    <input placeholder='Genre' onChange={(e)=>setGenre(e.target.value)}/>
-                    <textarea placeholder='Description' className='input-Desc'  onChange={(e)=>setDescription(e.target.value)}/>                    
-                </div>
-                <div className="right-block">
-                    <div className="textarea">
-                        <textarea placeholder='Sclupture your post...' className='input-post'  onChange={(e)=>setPostBody(e.target.value)} />
+                <h2 style={{textAlign : 'center'}}>Create New Post</h2> <br/>
+                <div className="input-block">
+                    <div className="left-block">
+                        <input placeholder='Title' onChange={(e)=>setPostTitle(e.target.value)}/>
+                        <input placeholder='Genre' onChange={(e)=>setGenre(e.target.value)}/>
+                        <textarea placeholder='Description' className='input-Desc'  onChange={(e)=>setDescription(e.target.value)}/>                    
                     </div>
-                    <div >
-                        <button className='btn' onClick={submitPost}>POST</button>
+                    <div className="right-block">
+                        <div className="textarea">
+                            <textarea placeholder='Sclupture your post...' className='input-post'  onChange={(e)=>setPostBody(e.target.value)} />
+                        </div>  
                     </div>
-                    
                 </div>
+                <div className='postbtn'>
+                    <button className='btn' onClick={submitPost}>POST</button>
+                </div> 
+                
             </div>
+            
+           
         </>
     )
 }

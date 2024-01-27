@@ -109,49 +109,52 @@ const Home = () =>{
                 
             {mainPosts?.length > 0 ?
                 <div className='home-body'>
-                <div className="post-outerblock">
-                    
-                    {mainPosts.map(e => {                        
+                    <div className="post-border">
+                        <div className="post-outerblock">
+                            
+                            {mainPosts.map(e => {                        
+                                    return(
+                                        <div  className="Post-block" >
+                                        <PostDetails 
+                                                key={e?.PostId} 
+                                                Title = {e?.PostTitle} 
+                                                Description = {trimDescription(e?.PostDescription)} 
+                                                Body = {e?.PostBody}> </PostDetails>
+                                        <Author Key={e?.AuthorId} AuthorName = {e?.PostAuthor} genre = {e?.Genre} ></Author>
+                                        </div> 
+                                    )
+                                })}         
+                            <div className='Nextpost-btn'>  
+                                    <button disabled = {mainPageCount >= 3 ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev-3})}} >Previous</button>
+                                    <button disabled = {(mainPageCount+3 < response.length) && (mainPosts.length <= 3) ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev+3})}}>NEXT</button> 
+                            </div> 
+                        </div>
+                    </div>
+                
+
+
+                    <div className='relatedPost-block'>
+                        <h3 className='RelatedPost-title'>Related Post</h3>
+                        {relatedPosts.map((item) => {
                             return(
-                                <div  className="Post-block" >
-                                   <PostDetails 
-                                        key={e?.PostId} 
-                                        Title = {e?.PostTitle} 
-                                        Description = {trimDescription(e?.PostDescription)} 
-                                        Body = {e?.PostBody}> </PostDetails>
-                                   <Author Key={e?.AuthorId} AuthorName = {e?.PostAuthor} genre = {e?.Genre} args = {e}></Author>
-                                </div> 
+                                <>
+                                    <RelatedPost 
+                                        Title = {item.PostTitle} 
+                                        Description = {item.PostDescription}></RelatedPost>                            
+                                </>                            
                             )
-                        })}         
-                     <div className='Nextpost-btn'>  
-                            <button disabled = {mainPageCount >= 3 ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev-3})}} >Previous</button>
-                            <button disabled = {(mainPageCount+3 < response.length) && (mainPosts.length < 3) ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev+3})}}>NEXT</button> 
-                    </div> 
-                </div>
-
-
-                <div className='relatedPost-block'>
-                    <h3 className='RelatedPost-title'>Related Post</h3>
-                    {relatedPosts.map((item) => {
-                        return(
-                            <>
-                                <RelatedPost 
-                                    Title = {item.PostTitle} 
-                                    Description = {item.PostDescription}></RelatedPost>                            
-                            </>                            
-                        )
-                    })}
-                     
-                    
-                    <div className='Nextpost-btn'>
-                    { relatedPageCount >= 3 &&
-                        <button onClick={()=>{setrelatedPageCount( (prev)=>{return prev-3} )}}>Previous</button> 
-                    }
-                    { relatedPageCount + 3 < response.length &&     
-                        <button onClick={()=>{setrelatedPageCount( (prev)=>{return prev+3} )}}>NEXT</button> 
-                    }                       
-                    </div>  
-                </div>
+                        })}
+                        
+                        
+                        <div className='Nextpost-btn'>
+                        { relatedPageCount >= 3 &&
+                            <button onClick={()=>{setrelatedPageCount( (prev)=>{return prev-3} )}}>Previous</button> 
+                        }
+                        { relatedPageCount + 3 < response.length &&     
+                            <button onClick={()=>{setrelatedPageCount( (prev)=>{return prev+3} )}}>NEXT</button> 
+                        }                       
+                        </div>  
+                    </div>
 
             </div>
              :   

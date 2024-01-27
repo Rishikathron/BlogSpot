@@ -35,8 +35,7 @@ const getUserDetail = async (req,res) =>{
 const loginUser = async (req,res)=>{
     try{
         console.log("Inside login user" + req.body.name)
-        if(req.body?.name != null && req.body?.password != null){
-            
+        if(req.body?.name != null && req.body?.password != null && req.body?.name != "" && req.body?.password != ""){            
             const userData = await userModel.findOne({Email : req.body.name});
             console.log(userData)
             if(userData != null){
@@ -45,7 +44,7 @@ const loginUser = async (req,res)=>{
                     res.status(200).json({userData , message : "Logged in Successfully"});
                 }
                 else{
-                    res.status(400).json({message : "Password missmatch"})
+                    res.status(200).json({message : "Password missmatch"})
                 }
             }
             else{

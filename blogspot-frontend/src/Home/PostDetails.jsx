@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom"
 
-const PostsDetails = ({key,Title,Description,Body , args}) =>{
+const PostsDetails = ({key,Title,Description,Body }) =>{
 
     const navigate = useNavigate();
 
     const postComponentClick = () =>{        
-        navigate('/BlogPost',{state : {PostTitle : Title , PostDescription : Description , PostBody : Body , PostLike : args.PostLike}});
+        navigate('/BlogPost',{state : {PostTitle : Title , PostDescription : Description , PostBody : Body }});
     }
     
 
