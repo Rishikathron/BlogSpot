@@ -92,6 +92,7 @@ const AuthorDetail = () =>{
                             <button disabled = {Post+3 < Post.length ? "" : "disabled"} onClick={()=>{setauthorPageCount(prev => {return prev+3})}}>NEXT</button> 
                         </div>  }
                     </div>
+                    
                 </div>
             </div>
         </>

@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     PostBody : {type : String},
     AuthorId : {type : String},
     PostAuthor : {type : String},
-    PostLike : {type : String},
+    PostLike : {type : Number},
     Genre : {type : String},
     CreatedDate : {type : Date , default : Date.now},
     ModifiedDate : {type : Date}

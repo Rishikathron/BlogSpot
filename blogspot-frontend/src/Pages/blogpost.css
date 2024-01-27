@@ -1,0 +1,30 @@
+.Title-block{
+    display: flex;
+    gap: 2rem;
+}
+
+.hearts{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;   
+    margin-top: .5rem; 
+}
+
+.like-icon-red{
+    cursor: pointer;
+    background-image: url("../../public/heart.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 30px;
+}
+
+.like-icon-black{
+    cursor: pointer;
+    background-image: url("../../public/heartblack.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin-top: 1px;
+    height: 20px;
+    width: 30px;
+}

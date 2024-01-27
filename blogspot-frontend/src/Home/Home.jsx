@@ -17,6 +17,8 @@ const Home = () =>{
     const [relatedPosts , setRelatedPosts] = useState([]);
     const [mainPosts,setmainPosts] = useState([]);
     const [LoaderStatus , setLoaderStatus] = useState(false);
+    const [searchValue , setSearchValue] = useState("");
+    const [searchStatus , setSeachStatus] = useState(false);
    
     useEffect(()=>{
         setLoaderStatus(true)
@@ -32,6 +34,26 @@ const Home = () =>{
         setLoaderStatus(false)       
         
     },[])
+
+    useEffect(()=>{
+        console.log(searchValue)
+        let MainPost_Clone = response.slice(mainPageCount,mainPageCount+3) 
+        if(searchValue.length > 0){
+            setSeachStatus(true);
+            let SearchedPost = MainPost_Clone.filter((e)=>{
+                if (e.PostTitle.includes(searchValue)){
+                    return e;
+                }                
+           })
+           console.log(SearchedPost)
+           setmainPosts(SearchedPost)
+
+        }
+        else{
+            setSeachStatus(false);
+            setmainPosts(response.slice(mainPageCount,mainPageCount+3))
+        }
+    },[searchValue])
 
 
     useEffect(()=>{
@@ -50,7 +72,7 @@ const Home = () =>{
 
     
     function trimDescription(postDescription){
-        let desc = postDescription.split('').slice(0,200).join('') + '...';
+        let desc = postDescription?.split('')?.slice(0,200)?.join('') + '...';
         return desc
     }
 
@@ -60,12 +82,22 @@ const Home = () =>{
         console.log("Mainpost ", value)
     }
 
-    const loader = () =>{         
-        return (
-            <>
-                <h1 className="loading-block">LOADING...</h1>           
-            </>
-        )        
+    const loader = () =>{    
+        if(searchStatus == true){
+            return (
+                <>
+                    <h1 className="NoPost-block">NoPosts Found...</h1>           
+                </>
+            )
+        }
+        else     
+            return (
+                <>
+                    <h1 className="loading-block">LOADING...</h1>           
+                </>
+            )    
+        
+           
     }
    
 
@@ -73,7 +105,7 @@ const Home = () =>{
     return (
     <>
         <div>
-            <div><Searchbar mainPosts = {mainPosts} setmainPosts = {setmainPosts}></Searchbar> </div>    
+            <div><Searchbar searchValue = {searchValue} setSearchValue = {setSearchValue} setSearchStatus = {setSeachStatus}></Searchbar> </div>    
                 
             {mainPosts?.length > 0 ?
                 <div className='home-body'>
@@ -83,17 +115,17 @@ const Home = () =>{
                             return(
                                 <div  className="Post-block" >
                                    <PostDetails 
-                                        key={e.PostId} 
-                                        Title = {e.PostTitle} 
-                                        Description = {trimDescription(e.PostDescription)} 
-                                        Body = {e.PostBody}> </PostDetails>
-                                   <Author Key={e.AuthorId} AuthorName = {e.PostAuthor} genre = {e.Genre}></Author>
+                                        key={e?.PostId} 
+                                        Title = {e?.PostTitle} 
+                                        Description = {trimDescription(e?.PostDescription)} 
+                                        Body = {e?.PostBody}> </PostDetails>
+                                   <Author Key={e?.AuthorId} AuthorName = {e?.PostAuthor} genre = {e?.Genre} args = {e}></Author>
                                 </div> 
                             )
                         })}         
                      <div className='Nextpost-btn'>  
                             <button disabled = {mainPageCount >= 3 ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev-3})}} >Previous</button>
-                            <button disabled = {mainPageCount+3 < response.length ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev+3})}}>NEXT</button> 
+                            <button disabled = {(mainPageCount+3 < response.length) && (mainPosts.length < 3) ? "" : "disabled"} onClick={()=>{setmainPageCount(prev => {return prev+3})}}>NEXT</button> 
                     </div> 
                 </div>
 
@@ -122,9 +154,9 @@ const Home = () =>{
                 </div>
 
             </div>
-             : 
+             :   
                 <div className='parent-loader'>
-                    { loader()}
+                    {loader()}                   
                 </div>
             }
         </div> 

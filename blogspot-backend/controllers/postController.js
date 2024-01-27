@@ -73,7 +73,7 @@ const updatePost = async (req,res) => {
                 postData.PostAuthor = req.body.authorName,
                 postData.PostLike = req.body.postLike,
                 postData.Genre = req.body.genre
-                await postData.save();
+                await postData.update();
                 res.status(200).json({message : "Post Updated"})
             }
             else{
